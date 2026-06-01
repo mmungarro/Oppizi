@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    participant Admin as Admin User (Dashboard)
+    participant Dashboard as Campaign Dashboard (UI)
+    participant API as Campaign API Service
+    participant Geo as Geolocation Service
+    participant QR as QR Pool Service
+    participant Stock as Flyer Stock Service
+    participant DB as Campaign Database
+
+    Admin->>Dashboard: Create new campaign (form submission)
+    Dashboard->>API: POST /campaigns (campaign metadata)
+
+    API->>Geo: Validate serviceable geolocation areas
+    Geo-->>API: Validation result
+
+    API->>QR: Check QR code pool availability
+    QR-->>API: QR pool status
+
+    API->>Stock: Check flyer stock levels
+    Stock-->>API: Stock availability
+
+    API->>DB: Insert campaign metadata
+    DB-->>API: Campaign stored
+
+    API-->>Dashboard: Campaign created (status = Draft)
+    Dashboard-->>Admin: Show confirmation + Draft status

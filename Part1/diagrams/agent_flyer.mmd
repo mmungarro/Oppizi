@@ -1,0 +1,28 @@
+sequenceDiagram
+    autonumber
+    participant Agent as Field Agent (Mobile App)
+    participant Mobile as Mobile App
+    participant AgentAPI as Agent API Service
+    participant Geo as Geofencing Service
+    participant QR as QR Validation Service
+    participant Audit as Audit Log Service
+    participant Report as Reporting Engine
+
+    Agent->>Mobile: Open assigned campaign & route
+    Agent->>Mobile: Scan flyer QR code
+    Mobile->>AgentAPI: POST /scan {QR, location, timestamp}
+
+    AgentAPI->>Geo: Validate geofencing compliance
+    Geo-->>AgentAPI: Geofence OK/Fail
+
+    AgentAPI->>QR: Validate QR belongs to campaign
+    QR-->>AgentAPI: QR valid/invalid
+
+    AgentAPI->>Audit: Log delivery entry (scan details)
+    Audit-->>AgentAPI: Logged
+
+    AgentAPI->>Report: Send scan event for aggregation
+    Report-->>AgentAPI: Acknowledged
+
+    AgentAPI-->>Mobile: Scan accepted/rejected
+    Mobile-->>Agent: Display result
