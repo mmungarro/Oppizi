@@ -49,7 +49,7 @@ Make sure the PNG files are placed inside the `/diagrams` folder.
 ## 2️⃣ **Agent Flyer Scan – Sequence Diagram**
 
 `[Parece que el resultado no era seguro para mostrar. ¡Cambiemos de enfoque y probemos algo diferente!]`
-
+ ![image](./diagrams/agent_flyer_scan.png)
 ---
 
 ## 3️⃣ **Architecture Overview – Component Interaction Diagram**
