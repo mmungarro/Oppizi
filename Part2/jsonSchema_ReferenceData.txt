@@ -1,0 +1,168 @@
+{
+  "type": "object",
+  "properties": {
+    "ChargerTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Comments": { "type": ["string", "null"] },
+          "IsFastChargeCapable": { "type": ["boolean", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "ConnectionTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "FormalName": { "type": ["string", "null"] },
+          "IsDiscontinued": { "type": ["boolean", "null"] },
+          "IsObsolete": { "type": ["boolean", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "CurrentTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Description": { "type": ["string", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+"Countries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ISOCode": { "type": ["string", "null"] },
+          "ContinentCode": { "type": ["string", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "DataProviders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "WebsiteURL": { "type": ["string", "null"] },
+          "Comments": { "type": ["string", "null"] },
+          "DataProviderStatusType": { "type": ["object", "null"] },
+          "IsRestrictedEdit": { "type": ["boolean", "null"] },
+          "IsOpenDataLicensed": { "type": ["boolean", "null"] },
+          "IsApprovedImport": { "type": ["boolean", "null"] },
+          "License": { "type": ["string", "null"] },
+          "DateLastImported": { "type": ["string", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "Operators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "WebsiteURL": { "type": ["string", "null"] },
+          "Comments": { "type": ["string", "null"] },
+          "PhonePrimaryContact": { "type": ["string", "null"] },
+          "PhoneSecondaryContact": { "type": ["string", "null"] },
+          "IsPrivateIndividual": { "type": ["boolean", "null"] },
+          "AddressInfo": { "type": ["object", "null"] },
+          "BookingURL": { "type": ["string", "null"] },
+          "ContactEmail": { "type": ["string", "null"] },
+          "FaultReportEmail": { "type": ["string", "null"] },
+          "IsRestrictedEdit": { "type": ["boolean", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+"StatusTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "IsOperational": { "type": ["boolean", "null"] },
+          "IsUserSelectable": { "type": ["boolean", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "UsageTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "IsPayAtLocation": { "type": ["boolean", "null"] },
+          "IsMembershipRequired": { "type": ["boolean", "null"] },
+          "IsAccessKeyRequired": { "type": ["boolean", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "MetadataGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "DataProviderID": { "type": ["number", "null"] },
+          "IsRestrictedEdit": { "type": ["boolean", "null"] },
+          "IsPublicInterest": { "type": ["boolean", "null"] },
+          "MetadataFields": { "type": ["array", "null"] },
+          "ID": { "type": ["number", "null"] },
+          "Title": { "type": ["string", "null"] }
+        }
+      }
+    },
+"ChargePoint": {
+      "type": "object",
+      "properties": {
+        "DataProvider": { "type": ["object", "null"] },
+        "OperatorInfo": { "type": ["object", "null"] },
+        "UsageType": { "type": ["object", "null"] },
+        "StatusType": { "type": ["object", "null"] },
+        "SubmissionStatus": { "type": ["object", "null"] },
+        "UserComments": { "type": ["array", "null"] },
+        "PercentageSimilarity": { "type": ["number", "null"] },
+        "MediaItems": { "type": ["array", "null"] },
+        "IsRecentlyVerified": { "type": ["boolean", "null"] },
+        "DateLastVerified": { "type": ["string", "null"] },
+        "ID": { "type": ["number", "null"] },
+        "UUID": { "type": ["string", "null"] },
+        "ParentChargePointID": { "type": ["number", "null"] },
+        "DataProviderID": { "type": ["number", "null"] },
+        "OperatorID": { "type": ["number", "null"] },
+        "UsageTypeID": { "type": ["number", "null"] },
+        "UsageCost": { "type": ["string", "null"] },
+        "AddressInfo": { "type": ["object", "null"] },
+        "Connections": { "type": ["array", "null"] },
+        "NumberOfPoints": { "type": ["number", "null"] },
+        "GeneralComments": { "type": ["string", "null"] },
+        "DateCreated": { "type": ["string", "null"] }
+      }
+    },
+    "UserComment": {
+      "type": "object",
+      "properties": {
+        "ID": { "type": ["number", "null"] },
+        "ChargePointID": { "type": ["number", "null"] },
+        "CommentTypeID": { "type": ["number", "null"] },
+        "Comment": { "type": ["string", "null"] },
+        "Rating": { "type": ["number", "null"] },
+        "DateCreated": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

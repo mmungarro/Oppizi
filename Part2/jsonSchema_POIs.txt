@@ -1,0 +1,207 @@
+{
+  "type": "object",
+  "properties": {
+    "DataProvider": {
+      "type": "object",
+      "properties": {
+        "WebsiteURL": { "type": ["string", "null"] },
+        "Comments": { "type": ["string", "null"] },
+        "DataProviderStatusType": {
+          "type": "object",
+          "properties": {
+            "IsProviderEnabled": { "type": "boolean" },
+            "ID": { "type": "integer" },
+            "Title": { "type": "string" }
+          },
+          "required": ["IsProviderEnabled", "ID", "Title"]
+        },
+        "IsRestrictedEdit": { "type": "boolean" },
+        "IsOpenDataLicensed": { "type": "boolean" },
+        "IsApprovedImport": { "type": "boolean" },
+        "License": { "type": ["string", "null"] },
+        "DateLastImported": { "type": ["string", "null"] },
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" }
+      },
+      "required": ["WebsiteURL", "DataProviderStatusType", "ID", "Title"]
+    },
+    "OperatorInfo": {
+      "type": "object",
+      "properties": {
+        "WebsiteURL": { "type": ["string", "null"] },
+        "Comments": { "type": ["string", "null"] },
+        "PhonePrimaryContact": { "type": ["string", "null"] },
+        "PhoneSecondaryContact": { "type": ["string", "null"] },
+        "IsPrivateIndividual": { "type": "boolean" },
+        "AddressInfo": { "type": ["object", "null"] },
+        "BookingURL": { "type": ["string", "null"] },
+        "ContactEmail": { "type": ["string", "null"] },
+        "FaultReportEmail": { "type": ["string", "null"] },
+        "IsRestrictedEdit": { "type": "boolean" },
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" }
+      },
+      "required": ["WebsiteURL", "ID", "Title"]
+    },
+    "UsageType": {
+      "type": "object",
+      "properties": {
+        "IsPayAtLocation": { "type": "boolean" },
+        "IsMembershipRequired": { "type": "boolean" },
+        "IsAccessKeyRequired": { "type": "boolean" },
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" }
+      },
+      "required": ["ID", "Title"]
+    },
+    "StatusType": {
+      "type": "object",
+      "properties": {
+        "IsOperational": { "type": "boolean" },
+        "IsUserSelectable": { "type": "boolean" },
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" }
+      },
+      "required": ["IsOperational", "ID", "Title"]
+    },
+    "SubmissionStatus": {
+      "type": "object",
+      "properties": {
+        "IsLive": { "type": "boolean" },
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" }
+      },
+      "required": ["IsLive", "ID", "Title"]
+    },
+    "UserComments": { "type": ["string", "null"] },
+    "PercentageSimilarity": { "type": ["number", "null"] },
+    "MediaItems": { "type": ["array", "null"] },
+    "IsRecentlyVerified": { "type": "boolean" },
+    "DateLastVerified": { "type": "string", "format": "date-time" },
+    "ID": { "type": "integer" },
+    "UUID": { "type": "string" },
+    "ParentChargePointID": { "type": ["integer", "null"] },
+    "DataProviderID": { "type": "integer" },
+    "DataProvidersReference": { "type": ["string", "null"] },
+    "OperatorID": { "type": "integer" },
+    "OperatorsReference": { "type": ["string", "null"] },
+    "UsageTypeID": { "type": "integer" },
+    "UsageCost": { "type": ["string", "null"] },
+    "AddressInfo": {
+      "type": "object",
+      "properties": {
+        "ID": { "type": "integer" },
+        "Title": { "type": "string" },
+        "AddressLine1": { "type": ["string", "null"] },
+        "AddressLine2": { "type": ["string", "null"] },
+        "Town": { "type": "string" },
+        "StateOrProvince": { "type": "string" },
+        "Postcode": { "type": "string" },
+        "CountryID": { "type": "integer" },
+        "Country": {
+          "type": "object",
+          "properties": {
+            "ISOCode": { "type": "string" },
+            "ContinentCode": { "type": "string" },
+            "ID": { "type": "integer" },
+            "Title": { "type": "string" }
+          },
+          "required": ["ISOCode", "ContinentCode", "ID", "Title"]
+        },
+        "Latitude": { "type": "number" },
+        "Longitude": { "type": "number" },
+        "ContactTelephone1": { "type": ["string", "null"] },
+        "ContactTelephone2": { "type": ["string", "null"] },
+        "ContactEmail": { "type": ["string", "null"] },
+        "AccessComments": { "type": ["string", "null"] },
+        "RelatedURL": { "type": ["string", "null"] },
+        "Distance": { "type": ["number", "null"] },
+        "DistanceUnit": { "type": "integer" }
+      },
+      "required": ["ID", "Title", "Town", "CountryID", "Latitude", "Longitude"]
+    },
+    "Connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ID": { "type": "integer" },
+          "ConnectionTypeID": { "type": "integer" },
+          "ConnectionType": {
+            "type": "object",
+            "properties": {
+              "FormalName": { "type": ["string", "null"] },
+              "IsDiscontinued": { "type": "boolean" },
+              "IsObsolete": { "type": "boolean" },
+              "ID": { "type": "integer" },
+              "Title": { "type": "string" }
+            },
+            "required": ["IsDiscontinued", "IsObsolete", "ID", "Title"]
+          },
+          "Reference": { "type": ["string", "null"] },
+          "StatusTypeID": { "type": "integer" },
+          "StatusType": {
+            "type": "object",
+            "properties": {
+              "IsOperational": { "type": "boolean" },
+              "IsUserSelectable": { "type": "boolean" },
+              "ID": { "type": "integer" },
+              "Title": { "type": "string" }
+            },
+            "required": ["IsOperational", "ID", "Title"]
+          },
+          "LevelID": { "type": "integer" },
+          "Level": {
+            "type": "object",
+            "properties": {
+              "Comments": { "type": ["string", "null"] },
+              "IsFastChargeCapable": { "type": "boolean" },
+              "ID": { "type": "integer" },
+              "Title": { "type": "string" }
+            },
+            "required": ["IsFastChargeCapable", "ID", "Title"]
+          },
+          "Amps": { "type": ["number", "null"] },
+          "Voltage": { "type": ["number", "null"] },
+          "PowerKW": { "type": "number" },
+          "CurrentTypeID": { "type": "integer" },
+          "CurrentType": {
+            "type": "object",
+            "properties": {
+              "Description": { "type": "string" },
+              "ID": { "type": "integer" },
+              "Title": { "type": "string" }
+            },
+            "required": ["Description", "ID", "Title"]
+          },
+          "Quantity": { "type": "integer" },
+          "Comments": { "type": ["string", "null"] }
+        },
+        "required": ["ID", "ConnectionTypeID", "PowerKW", "CurrentTypeID", "Quantity"]
+      }
+    },
+    "NumberOfPoints": { "type": "integer" },
+    "GeneralComments": { "type": ["string", "null"] },
+    "DatePlanned": { "type": ["string", "null"], "format": "date-time" },
+    "DateLastConfirmed": { "type": ["string", "null"], "format": "date-time" },
+    "StatusTypeID": { "type": "integer" },
+    "DateLastStatusUpdate": { "type": "string", "format": "date-time" },
+    "MetadataValues": { "type": ["array", "null"] },
+    "DataQualityLevel": { "type": "integer" },
+    "DateCreated": { "type": "string", "format": "date-time" },
+    "SubmissionStatusTypeID": { "type": "integer" }
+  },
+  "required": [
+    "DataProvider",
+    "OperatorInfo",
+    "UsageType",
+    "StatusType",
+    "SubmissionStatus",
+    "ID",
+    "UUID",
+    "AddressInfo",
+    "Connections",
+    "NumberOfPoints",
+    "DateCreated"
+  ]
+}
