@@ -153,18 +153,18 @@ This prevents failures caused by inconsistent API responses.
 
 ---
 
-## 📦 **9. Deliverables**
+## **9. Deliverables**
 
 This project includes:
 
 - ✔ Postman Collection with all tests  
 - ✔ Collection variables containing schemas  
 - ✔ README.md (this document)  
-- ✔ Optional: Newman reports or screenshots  
+- ✔ Optional: New man reports or screenshots  
 
 ---
 
-## **10. Contact**
+## **10. Contact information**
 
 If you need something else or you have any doubts, please feel free to [contact me:](mailto:mmungarro@gmail.com)
 
