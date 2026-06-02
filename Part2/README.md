@@ -141,7 +141,7 @@ This prevents failures caused by inconsistent API responses.
 ** All test passed successfully **
 
 - [Postman Test Results Image](https://drive.google.com/file/d/1KBm0-JqoS93f6fAwvdKXBN3Is6VypiFg/view?usp=sharing)
-- <a href="./Evidence/Oppizzi Collection-2026-06-01-18-21-14-460-0.html" target="_blank" rel="noopener noreferrer">Newman HTML Report</a>
+- [HTML Report Image](https://drive.google.com/file/d/19kqt9rnTwASTOZes1_MfhXBXzlANMbxK/view?usp=sharing)
 
 
 ### **Observations**
