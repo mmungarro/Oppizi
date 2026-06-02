@@ -12,3 +12,9 @@
 * [Part 1 – System Journeys and Architecture](./Part1/README.md)
 * [Part 2 – API Testing](./Part2/README.md)
 * [Part 3 – Manual Testing Assignment](./Part3/README.md)
+
+
+
+## **Contact information**
+
+If you need something else or you have any doubts, please feel free to [contact me:](mailto:mmungarro@gmail.com)
