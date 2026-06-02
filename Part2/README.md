@@ -1,5 +1,3 @@
-# opizzi
----
 
 # **Part 2 – API Testing: Open Charge Map**
 
