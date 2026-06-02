@@ -79,7 +79,7 @@ Validations:
 - POI JSON Schema validation
 - Business logic:
   - Must return **at least one POI**
-  - Each POI must contain **valid latitude and longitude**
+  - Each POI must be contained between **valid latitude and longitude**
 
 ---
 
