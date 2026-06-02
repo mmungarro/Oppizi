@@ -36,13 +36,7 @@ To run the tests, you need:
 1. Open Postman  
 2. Click **Import**  
 3. Select the file:
-
-
-    Postman Collections: 
-        [Open Collections ](./Oppizzi Collection.postman_collection.json)
-
-        Click the link below to download the template file to your local machine:
-            <a href="./bug_report_sample.md" download>Download Bug Report Template</a>
+    [Collections](./Evidence/Oppizi_Collection.postman_collection.json)
 
 4. Import the environment file (if provided)  
 5. Set your API key in the environment variable:
