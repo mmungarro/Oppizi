@@ -55,14 +55,16 @@ To run the tests, you need:
 
 ### **B. Run using Newman (optional)**
 
+** Install html reporter **
+ Follow the instructions on [htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 ```bash
-newman run OpenChargeMap.postman_collection.json
+newman run Oppizi_Collection.postman_collection.json
 ```
 
 Generate an HTML report:
 
 ```bash
-newman run OpenChargeMap.postman_collection.json -r htmlextra
+newman run Oppizi_Collection.postman_collection.json -r htmlextra
 ```
 
 ---
