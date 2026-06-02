@@ -1,0 +1,225 @@
+{
+  "info": {
+    "_postman_id": "d9059dff-7c27-497f-b9f1-cdcd649e1461",
+    "name": "Oppizzi Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12009910",
+    "_collection_link": "https://go.postman.co/collection/12009910-d9059dff-7c27-497f-b9f1-cdcd649e1461?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get POIs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Validate reponse time unde 1000ms \r",
+              "pm.test(\"Validate response time under 1000ms\", function(){\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "\r",
+              "});\r",
+              "\r",
+              "//Validate HTTP Response code to be = 200\r",
+              "pm.test(\"Validate response code = 200\", function(){\r",
+              "    pm.expect(pm.response.to.have.status(200));\r",
+              "\r",
+              "})\r",
+              "\r",
+              "//validate shema from POI response\r",
+              "pm.test(\"valida schema json\", function () {\r",
+              "\r",
+              "    const data = pm.response.json();\r",
+              "\r",
+              "    pm.expect(data).to.be.an(\"array\");\r",
+              "\r",
+              "    const firstObject = data[0];\r",
+              "\r",
+              "    const schemaText = pm.collectionVariables.get(\"col_poiSchema\");\r",
+              "    const poiobject = JSON.parse(schemaText);\r",
+              "\r",
+              "    pm.expect(firstObject).to.have.jsonSchema(poiobject);\r",
+              "});\r",
+              "\r",
+              "//Validate bussines logic rules\r",
+              " \r",
+              "//  1. Validate POI to has elements.\r",
+              "pm.test(\"POI has at least 1 element\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data.length).to.be.above(0);\r",
+              "});\r",
+              "\r",
+              "//   2. Validate if Town name is equal La Paz\r",
+              "pm.test(\"Validate if chargers are in La Paz\", function(){\r",
+              "  \r",
+              "    const json = pm.response.json();\r",
+              "    json.forEach(poi => {\r",
+              "        pm.expect(poi.AddressInfo.Town).to.eql(\"La Paz\");\r",
+              "\r",
+              "}); \r",
+              "\r",
+              "\r",
+              "\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{col_baseUrl}}/poi?key={{col_key}}&boundingbox={{coll_boundingBox}}",
+          "host": [
+            "{{col_baseUrl}}"
+          ],
+          "path": [
+            "poi"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{col_key}}"
+            },
+            {
+              "key": "boundingbox",
+              "value": "{{coll_boundingBox}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Reference Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "\r",
+              "\r",
+              "// Validate response time under 1000ms\r",
+              "pm.test(\"Validate response time under 1000ms\", function(){\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "\r",
+              "})\r",
+              "\r",
+              "// Validate reponse code equals to 200\r",
+              "pm.test(\"Validate response code = 200\", function(){\r",
+              "    pm.expect(pm.response.to.have.status(200));\r",
+              "\r",
+              "})\r",
+              "\r",
+              "\r",
+              "//validate shema from Reference Data response ... \r",
+              "pm.test(\"valida Reference Data schema\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "\r",
+              "    const schemaText = pm.collectionVariables.get(\"col_referenceDataSchema\");\r",
+              "    const rdObject = JSON.parse(schemaText);\r",
+              "\r",
+              "    pm.expect(data).to.have.jsonSchema(rdObject);\r",
+              "   \r",
+              "});\r",
+              "\r",
+              "\r",
+              "// Validate business rules\r",
+              "//     1. Validate bussines logic rules\r",
+              "pm.test(\"Validate Chargers types has elements\", function(){\r",
+              "  \r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data.ChargerTypes.length).to.be.above(0);\r",
+              "\r",
+              "}); \r",
+              "\r",
+              "//      2. Business logic: ConnectionTypes > 0\r",
+              "pm.test(\"ConnectionTypes must have at least 1 element\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data.ConnectionTypes.length).to.be.above(0);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{col_baseUrl}}/referencedata?key={{col_key}}",
+          "host": [
+            "{{col_baseUrl}}"
+          ],
+          "path": [
+            "referencedata"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{col_key}}"
+            },
+            {
+              "key": "boundingbox",
+              "value": "{{coll_boundingBox}}",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "col_baseUrl",
+      "value": "https://api.openchargemap.io/v3/"
+    },
+    {
+      "key": "col_key",
+      "value": "9bb03e5b-0fb2-4916-9b2b-26c6bd27a56a"
+    },
+    {
+      "key": "coll_boundingBox",
+      "value": "(24.078624209031304,-110.38919400991283),(24.15951522870118,-110.26686880340897)"
+    },
+    {
+      "key": "col_poiSchema",
+      "value": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"DataProvider\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"WebsiteURL\": { \"type\": [\"string\", \"null\"] },\n        \"Comments\": { \"type\": [\"string\", \"null\"] },\n        \"DataProviderStatusType\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"IsProviderEnabled\": { \"type\": \"boolean\" },\n            \"ID\": { \"type\": \"integer\" },\n            \"Title\": { \"type\": \"string\" }\n          },\n          \"required\": [\"IsProviderEnabled\", \"ID\", \"Title\"]\n        },\n        \"IsRestrictedEdit\": { \"type\": \"boolean\" },\n        \"IsOpenDataLicensed\": { \"type\": \"boolean\" },\n        \"IsApprovedImport\": { \"type\": \"boolean\" },\n        \"License\": { \"type\": [\"string\", \"null\"] },\n        \"DateLastImported\": { \"type\": [\"string\", \"null\"] },\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" }\n      },\n      \"required\": [\"WebsiteURL\", \"DataProviderStatusType\", \"ID\", \"Title\"]\n    },\n    \"OperatorInfo\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"WebsiteURL\": { \"type\": [\"string\", \"null\"] },\n        \"Comments\": { \"type\": [\"string\", \"null\"] },\n        \"PhonePrimaryContact\": { \"type\": [\"string\", \"null\"] },\n        \"PhoneSecondaryContact\": { \"type\": [\"string\", \"null\"] },\n        \"IsPrivateIndividual\": { \"type\": \"boolean\" },\n        \"AddressInfo\": { \"type\": [\"object\", \"null\"] },\n        \"BookingURL\": { \"type\": [\"string\", \"null\"] },\n        \"ContactEmail\": { \"type\": [\"string\", \"null\"] },\n        \"FaultReportEmail\": { \"type\": [\"string\", \"null\"] },\n        \"IsRestrictedEdit\": { \"type\": \"boolean\" },\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" }\n      },\n      \"required\": [\"WebsiteURL\", \"ID\", \"Title\"]\n    },\n    \"UsageType\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"IsPayAtLocation\": { \"type\": \"boolean\" },\n        \"IsMembershipRequired\": { \"type\": \"boolean\" },\n        \"IsAccessKeyRequired\": { \"type\": \"boolean\" },\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" }\n      },\n      \"required\": [\"ID\", \"Title\"]\n    },\n    \"StatusType\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"IsOperational\": { \"type\": \"boolean\" },\n        \"IsUserSelectable\": { \"type\": \"boolean\" },\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" }\n      },\n      \"required\": [\"IsOperational\", \"ID\", \"Title\"]\n    },\n    \"SubmissionStatus\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"IsLive\": { \"type\": \"boolean\" },\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" }\n      },\n      \"required\": [\"IsLive\", \"ID\", \"Title\"]\n    },\n    \"UserComments\": { \"type\": [\"string\", \"null\"] },\n    \"PercentageSimilarity\": { \"type\": [\"number\", \"null\"] },\n    \"MediaItems\": { \"type\": [\"array\", \"null\"] },\n    \"IsRecentlyVerified\": { \"type\": \"boolean\" },\n    \"DateLastVerified\": { \"type\": \"string\", \"format\": \"date-time\" },\n    \"ID\": { \"type\": \"integer\" },\n    \"UUID\": { \"type\": \"string\" },\n    \"ParentChargePointID\": { \"type\": [\"integer\", \"null\"] },\n    \"DataProviderID\": { \"type\": \"integer\" },\n    \"DataProvidersReference\": { \"type\": [\"string\", \"null\"] },\n    \"OperatorID\": { \"type\": \"integer\" },\n    \"OperatorsReference\": { \"type\": [\"string\", \"null\"] },\n    \"UsageTypeID\": { \"type\": \"integer\" },\n    \"UsageCost\": { \"type\": [\"string\", \"null\"] },\n    \"AddressInfo\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"ID\": { \"type\": \"integer\" },\n        \"Title\": { \"type\": \"string\" },\n        \"AddressLine1\": { \"type\": [\"string\", \"null\"] },\n        \"AddressLine2\": { \"type\": [\"string\", \"null\"] },\n        \"Town\": { \"type\": \"string\" },\n        \"StateOrProvince\": { \"type\": \"string\" },\n        \"Postcode\": { \"type\": \"string\" },\n        \"CountryID\": { \"type\": \"integer\" },\n        \"Country\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"ISOCode\": { \"type\": \"string\" },\n            \"ContinentCode\": { \"type\": \"string\" },\n            \"ID\": { \"type\": \"integer\" },\n            \"Title\": { \"type\": \"string\" }\n          },\n          \"required\": [\"ISOCode\", \"ContinentCode\", \"ID\", \"Title\"]\n        },\n        \"Latitude\": { \"type\": \"number\" },\n        \"Longitude\": { \"type\": \"number\" },\n        \"ContactTelephone1\": { \"type\": [\"string\", \"null\"] },\n        \"ContactTelephone2\": { \"type\": [\"string\", \"null\"] },\n        \"ContactEmail\": { \"type\": [\"string\", \"null\"] },\n        \"AccessComments\": { \"type\": [\"string\", \"null\"] },\n        \"RelatedURL\": { \"type\": [\"string\", \"null\"] },\n        \"Distance\": { \"type\": [\"number\", \"null\"] },\n        \"DistanceUnit\": { \"type\": \"integer\" }\n      },\n      \"required\": [\"ID\", \"Title\", \"Town\", \"CountryID\", \"Latitude\", \"Longitude\"]\n    },\n    \"Connections\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"ID\": { \"type\": \"integer\" },\n          \"ConnectionTypeID\": { \"type\": \"integer\" },\n          \"ConnectionType\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"FormalName\": { \"type\": [\"string\", \"null\"] },\n              \"IsDiscontinued\": { \"type\": \"boolean\" },\n              \"IsObsolete\": { \"type\": \"boolean\" },\n              \"ID\": { \"type\": \"integer\" },\n              \"Title\": { \"type\": \"string\" }\n            },\n            \"required\": [\"IsDiscontinued\", \"IsObsolete\", \"ID\", \"Title\"]\n          },\n          \"Reference\": { \"type\": [\"string\", \"null\"] },\n          \"StatusTypeID\": { \"type\": \"integer\" },\n          \"StatusType\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"IsOperational\": { \"type\": \"boolean\" },\n              \"IsUserSelectable\": { \"type\": \"boolean\" },\n              \"ID\": { \"type\": \"integer\" },\n              \"Title\": { \"type\": \"string\" }\n            },\n            \"required\": [\"IsOperational\", \"ID\", \"Title\"]\n          },\n          \"LevelID\": { \"type\": \"integer\" },\n          \"Level\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"Comments\": { \"type\": [\"string\", \"null\"] },\n              \"IsFastChargeCapable\": { \"type\": \"boolean\" },\n              \"ID\": { \"type\": \"integer\" },\n              \"Title\": { \"type\": \"string\" }\n            },\n            \"required\": [\"IsFastChargeCapable\", \"ID\", \"Title\"]\n          },\n          \"Amps\": { \"type\": [\"number\", \"null\"] },\n          \"Voltage\": { \"type\": [\"number\", \"null\"] },\n          \"PowerKW\": { \"type\": \"number\" },\n          \"CurrentTypeID\": { \"type\": \"integer\" },\n          \"CurrentType\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"Description\": { \"type\": \"string\" },\n              \"ID\": { \"type\": \"integer\" },\n              \"Title\": { \"type\": \"string\" }\n            },\n            \"required\": [\"Description\", \"ID\", \"Title\"]\n          },\n          \"Quantity\": { \"type\": \"integer\" },\n          \"Comments\": { \"type\": [\"string\", \"null\"] }\n        },\n        \"required\": [\"ID\", \"ConnectionTypeID\", \"PowerKW\", \"CurrentTypeID\", \"Quantity\"]\n      }\n    },\n    \"NumberOfPoints\": { \"type\": \"integer\" },\n    \"GeneralComments\": { \"type\": [\"string\", \"null\"] },\n    \"DatePlanned\": { \"type\": [\"string\", \"null\"], \"format\": \"date-time\" },\n    \"DateLastConfirmed\": { \"type\": [\"string\", \"null\"], \"format\": \"date-time\" },\n    \"StatusTypeID\": { \"type\": \"integer\" },\n    \"DateLastStatusUpdate\": { \"type\": \"string\", \"format\": \"date-time\" },\n    \"MetadataValues\": { \"type\": [\"array\", \"null\"] },\n    \"DataQualityLevel\": { \"type\": \"integer\" },\n    \"DateCreated\": { \"type\": \"string\", \"format\": \"date-time\" },\n    \"SubmissionStatusTypeID\": { \"type\": \"integer\" }\n  },\n  \"required\": [\n    \"DataProvider\",\n    \"OperatorInfo\",\n    \"UsageType\",\n    \"StatusType\",\n    \"SubmissionStatus\",\n    \"ID\",\n    \"UUID\",\n    \"AddressInfo\",\n    \"Connections\",\n    \"NumberOfPoints\",\n    \"DateCreated\"\n  ]\n}"
+    },
+    {
+      "key": "col_referenceDataSchema",
+      "value": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"ChargerTypes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"Comments\": { \"type\": [\"string\", \"null\"] },\n          \"IsFastChargeCapable\": { \"type\": [\"boolean\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"ConnectionTypes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"FormalName\": { \"type\": [\"string\", \"null\"] },\n          \"IsDiscontinued\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsObsolete\": { \"type\": [\"boolean\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"CurrentTypes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"Description\": { \"type\": [\"string\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n\"Countries\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"ISOCode\": { \"type\": [\"string\", \"null\"] },\n          \"ContinentCode\": { \"type\": [\"string\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"DataProviders\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"WebsiteURL\": { \"type\": [\"string\", \"null\"] },\n          \"Comments\": { \"type\": [\"string\", \"null\"] },\n          \"DataProviderStatusType\": { \"type\": [\"object\", \"null\"] },\n          \"IsRestrictedEdit\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsOpenDataLicensed\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsApprovedImport\": { \"type\": [\"boolean\", \"null\"] },\n          \"License\": { \"type\": [\"string\", \"null\"] },\n          \"DateLastImported\": { \"type\": [\"string\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"Operators\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"WebsiteURL\": { \"type\": [\"string\", \"null\"] },\n          \"Comments\": { \"type\": [\"string\", \"null\"] },\n          \"PhonePrimaryContact\": { \"type\": [\"string\", \"null\"] },\n          \"PhoneSecondaryContact\": { \"type\": [\"string\", \"null\"] },\n          \"IsPrivateIndividual\": { \"type\": [\"boolean\", \"null\"] },\n          \"AddressInfo\": { \"type\": [\"object\", \"null\"] },\n          \"BookingURL\": { \"type\": [\"string\", \"null\"] },\n          \"ContactEmail\": { \"type\": [\"string\", \"null\"] },\n          \"FaultReportEmail\": { \"type\": [\"string\", \"null\"] },\n          \"IsRestrictedEdit\": { \"type\": [\"boolean\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n\"StatusTypes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"IsOperational\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsUserSelectable\": { \"type\": [\"boolean\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"UsageTypes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"IsPayAtLocation\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsMembershipRequired\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsAccessKeyRequired\": { \"type\": [\"boolean\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n    \"MetadataGroups\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"DataProviderID\": { \"type\": [\"number\", \"null\"] },\n          \"IsRestrictedEdit\": { \"type\": [\"boolean\", \"null\"] },\n          \"IsPublicInterest\": { \"type\": [\"boolean\", \"null\"] },\n          \"MetadataFields\": { \"type\": [\"array\", \"null\"] },\n          \"ID\": { \"type\": [\"number\", \"null\"] },\n          \"Title\": { \"type\": [\"string\", \"null\"] }\n        }\n      }\n    },\n\"ChargePoint\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"DataProvider\": { \"type\": [\"object\", \"null\"] },\n        \"OperatorInfo\": { \"type\": [\"object\", \"null\"] },\n        \"UsageType\": { \"type\": [\"object\", \"null\"] },\n        \"StatusType\": { \"type\": [\"object\", \"null\"] },\n        \"SubmissionStatus\": { \"type\": [\"object\", \"null\"] },\n        \"UserComments\": { \"type\": [\"array\", \"null\"] },\n        \"PercentageSimilarity\": { \"type\": [\"number\", \"null\"] },\n        \"MediaItems\": { \"type\": [\"array\", \"null\"] },\n        \"IsRecentlyVerified\": { \"type\": [\"boolean\", \"null\"] },\n        \"DateLastVerified\": { \"type\": [\"string\", \"null\"] },\n        \"ID\": { \"type\": [\"number\", \"null\"] },\n        \"UUID\": { \"type\": [\"string\", \"null\"] },\n        \"ParentChargePointID\": { \"type\": [\"number\", \"null\"] },\n        \"DataProviderID\": { \"type\": [\"number\", \"null\"] },\n        \"OperatorID\": { \"type\": [\"number\", \"null\"] },\n        \"UsageTypeID\": { \"type\": [\"number\", \"null\"] },\n        \"UsageCost\": { \"type\": [\"string\", \"null\"] },\n        \"AddressInfo\": { \"type\": [\"object\", \"null\"] },\n        \"Connections\": { \"type\": [\"array\", \"null\"] },\n        \"NumberOfPoints\": { \"type\": [\"number\", \"null\"] },\n        \"GeneralComments\": { \"type\": [\"string\", \"null\"] },\n        \"DateCreated\": { \"type\": [\"string\", \"null\"] }\n      }\n    },\n    \"UserComment\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"ID\": { \"type\": [\"number\", \"null\"] },\n        \"ChargePointID\": { \"type\": [\"number\", \"null\"] },\n        \"CommentTypeID\": { \"type\": [\"number\", \"null\"] },\n        \"Comment\": { \"type\": [\"string\", \"null\"] },\n        \"Rating\": { \"type\": [\"number\", \"null\"] },\n        \"DateCreated\": { \"type\": [\"string\", \"null\"] }\n      }\n    }\n  }\n}"
+    }
+  ]
+}
