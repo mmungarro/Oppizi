@@ -106,11 +106,7 @@ sequenceDiagram
     AgentAPI-->>Mobile: Scan accepted/rejected
     Mobile-->>Agent: Display result
 ```
----
 
-## 3️ **Architecture Overview – Component Interaction Diagram**
-
-`[Parece que el resultado no era seguro para mostrar. ¡Cambiemos de enfoque y probemos algo diferente!]`
 
 ---
 
@@ -123,7 +119,7 @@ You can edit it directly or regenerate PNGs using Mermaid Live Editor or Mermaid
 
 ## **campaign_creation.mmd**
 
-`mermaid
+mermaid
 sequenceDiagram
     autonumber
     participant Admin as Admin User (Dashboard)
@@ -151,7 +147,7 @@ sequenceDiagram
 
     API-->>Dashboard: Campaign created (status = Draft)
     Dashboard-->>Admin: Show confirmation + Draft status
-`
+
 
 ---
 
