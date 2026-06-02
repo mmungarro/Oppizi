@@ -123,7 +123,7 @@ You can edit it directly or regenerate PNGs using Mermaid Live Editor or Mermaid
 
 ## **campaign_creation.mmd**
 
-```mermaid
+`mermaid
 sequenceDiagram
     autonumber
     participant Admin as Admin User (Dashboard)
@@ -151,7 +151,7 @@ sequenceDiagram
 
     API-->>Dashboard: Campaign created (status = Draft)
     Dashboard-->>Admin: Show confirmation + Draft status
-```
+`
 
 ---
 
