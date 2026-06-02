@@ -55,8 +55,7 @@ To run the tests, you need:
 
 ### **B. Run using Newman (optional)**
 
-** Install html reporter **
- Follow the instructions on [htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
+**Install html reporter**, Follow the instructions on [htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 ```bash
 newman run Oppizi_Collection.postman_collection.json
 ```
