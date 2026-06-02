@@ -135,8 +135,8 @@ This prevents failures caused by inconsistent API responses.
 
 | Endpoint | Status | Time | Schema | Business Logic |
 |---------|--------|------|--------|----------------|
-| GET /poi/ | ✔ Passed | 312ms | ✔ Passed | ✔ Passed |
-| GET /referencedata/ | ✔ Passed | 487ms | ✔ Passed | ✔ Passed |
+| GET /poi/ | ✔ Passed | 414ms | ✔ Passed | ✔ Passed |
+| GET /referencedata/ | ✔ Passed | 471ms | ✔ Passed | ✔ Passed |
 
 ** All test passed successfully **
 
